@@ -1,0 +1,29 @@
+name: morning
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+#  workflow_dispatch:
+  push:
+
+jobs:
+  daily_attendance:
+    runs-on: ubuntu-latest
+    name: start attendance
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: master
+
+    - name: attendance
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+    - run: pip install -r ./requirements.txt && python ./main.py
+
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      PHONE: ${{ secrets.PHONE }}
