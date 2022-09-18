@@ -2,8 +2,7 @@ name: daily_attendance
 on:
   schedule:
     - cron:  '0 23 * * *'
-#  workflow_dispatch:
-  push:
+  workflow_dispatch:
 
 jobs:
   daily_attendance:
