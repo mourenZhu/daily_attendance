@@ -22,7 +22,7 @@ data = {
     'jzdShi.dm': '430100',
     'jzdXian.dm': '430104',
     'jzdDz': "湖南财政经济学院",
-    'jzdDz2': "13栋",
+    'jzdDz2': "湖南财政经济学院",
     'lxdh': phone,
     'sfzx': '1',
     'sfzx1': "在校",
