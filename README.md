@@ -1,4 +1,5 @@
 # 每日打卡项目
+本项目参考[chinazhoujunbo](https://github.com/chinazhoujunbo/sign-in)的源代码，非常感谢！  
 这是我的每日打卡项目，目前仅写了hufe易班每日打卡
 
 ## HUFE易班打卡启动流程
