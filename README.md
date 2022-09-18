@@ -10,6 +10,6 @@
       - HUFE_USERNAME
         - 这个值就是学号
       - HUFE_PASSWORD
-        - hufe@身份证后六位
+        - 默认密码是 hufe@身份证后六位
       - PHONE
 4. 开启github actions ![开启actions](/images/start_actions.jpg)
