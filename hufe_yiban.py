@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup as bs
 
 username = os.getenv('HUFE_USERNAME')
 password = os.getenv('HUFE_PASSWORD')
-# md5_password = os.getenv('HUFE_MD5_PASSWORD')
 phone = os.getenv('PHONE')
 md5 = hashlib.md5()
 
@@ -86,9 +85,7 @@ def get_md5_pw(pw):
         pw_md5 = pw_md5[0:5] + "a" + pw_md5[5:len(pw_md5)]
     if len(pw_md5) > 10:
         pw_md5 = pw_md5[0:10] + "b" + pw_md5[10:len(pw_md5)]
-
     pw_md5 = pw_md5[0:len(pw_md5) - 2]
-    print(pw_md5)
     return pw_md5
 
 
@@ -105,6 +102,9 @@ def login():
     res = requests.post(login_url, data={
         "uname": username,
         "pd_mm": get_md5_pw(password)}, headers=headers)
+    if res.json()['error']:
+        print(res.json()['msg'])
+        exit(401)
     jsession_id = res.cookies.get('JSESSIONID')
     # print(jsession_id)
     # print(res.text)
