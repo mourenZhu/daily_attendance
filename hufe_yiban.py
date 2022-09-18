@@ -99,10 +99,11 @@ def set_data_token():
 
 
 def login():
+    print("开始获取token")
     res = requests.post(login_url, data={
         "uname": username,
         "pd_mm": get_md5_pw(password)}, headers=headers)
-    if res.json()['error']:
+    if res.json().get('error'):
         print(res.json()['msg'])
         exit(401)
     jsession_id = res.cookies.get('JSESSIONID')
