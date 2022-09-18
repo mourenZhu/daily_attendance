@@ -1,4 +1,4 @@
-name: morning
+name: daily_attendance
 on:
   schedule:
     - cron:  '0 23 * * *'
