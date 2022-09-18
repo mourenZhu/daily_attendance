@@ -5,8 +5,9 @@ import hashlib
 import os
 from bs4 import BeautifulSoup as bs
 
-username = os.getenv('USERNAME')
-password = os.getenv('PASSWORD')
+username = os.getenv('HUFE_USERNAME')
+# password = os.getenv('HUFE_PASSWORD')
+md5_password = os.getenv('HUFE_MD5_PASSWORD')
 phone = os.getenv('PHONE')
 md5 = hashlib.md5()
 
@@ -103,7 +104,7 @@ def set_data_token():
 def login():
     res = requests.post(login_url, data={
         "uname": username,
-        "pd_mm": password}, headers=headers)
+        "pd_mm": md5_password}, headers=headers)
     jsession_id = res.cookies.get('JSESSIONID')
     # print(jsession_id)
     # print(res.text)

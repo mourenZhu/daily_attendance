@@ -1,7 +1,7 @@
 name: morning
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron:  '0 23 * * *'
 #  workflow_dispatch:
   push:
 
@@ -24,6 +24,6 @@ jobs:
     - run: pip install -r ./requirements.txt && python ./main.py
 
     env:
-      USERNAME: ${{ secrets.USERNAME }}
-      PASSWORD: ${{ secrets.PASSWORD }}
+      HUFE_USERNAME: ${{ secrets.HUFE_USERNAME }}
+      HUFE_MD5_PASSWORD: ${{ secrets.HUFE_MD5_PASSWORD }}
       PHONE: ${{ secrets.PHONE }}
