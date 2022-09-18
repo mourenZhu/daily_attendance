@@ -24,5 +24,5 @@ jobs:
 
     env:
       HUFE_USERNAME: ${{ secrets.HUFE_USERNAME }}
-      HUFE_MD5_PASSWORD: ${{ secrets.HUFE_MD5_PASSWORD }}
+      HUFE_PASSWORD: ${{ secrets.HUFE_PASSWORD }}
       PHONE: ${{ secrets.PHONE }}
