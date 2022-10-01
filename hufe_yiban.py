@@ -1,14 +1,13 @@
 from attendance import Attendance
 import time
 import requests
-import hashlib
+
 import os
 from bs4 import BeautifulSoup as bs
 
 username = os.getenv('HUFE_USERNAME')
 password = os.getenv('HUFE_PASSWORD')
 phone = os.getenv('PHONE')
-md5 = hashlib.md5()
 
 data = {
     'dkdz': "湖南省长沙市岳麓区咸嘉湖街道学仕路湖南财政经济学院",
@@ -79,6 +78,8 @@ def get_ts():
 
 
 def get_md5_pw(pw):
+    import hashlib
+    md5 = hashlib.md5()
     md5.update(pw.encode('latin1'))
     pw_md5 = md5.hexdigest()
     if len(pw_md5) > 5:
@@ -100,9 +101,13 @@ def set_data_token():
 
 def login():
     print("开始获取token")
-    res = requests.post(login_url, data={
+    print("username = " + username + " password = " + password)
+    up_data = {
         "uname": username,
-        "pd_mm": get_md5_pw(password)}, headers=headers)
+        "pd_mm": get_md5_pw(password)
+    }
+    print(up_data)
+    res = requests.post(login_url, data=up_data, headers=headers)
     if res.json().get('error'):
         print(res.json()['msg'])
         exit(401)
@@ -111,15 +116,29 @@ def login():
     # print(res.text)
     cookies['JSESSIONID'] = jsession_id
     # 这个不加也没事
-    headers['Set-Cookie'] = 'JSESSIONID=' + jsession_id
+    # headers['Set-Cookie'] = 'JSESSIONID=' + jsession_id
     set_data_token()
+
+
+def start():
+    login()
+    url = post_url + get_ts()
+    # print("url = " + url)
+    res = requests.post(url, cookies=cookies, data=data, headers=headers)
+    print(res.text)
 
 
 class HufeYiban(Attendance):
     def attendance(self):
-        print('开始HUFE易班打卡！')
-        login()
-        url = post_url + get_ts()
-        # print("url = " + url)
-        res = requests.post(url, cookies=cookies, data=data, headers=headers)
-        print(res.text)
+        is_time_out = True
+        attendance_num = 0
+        while is_time_out:
+            attendance_num = attendance_num + 1
+            print("开始第" + str(attendance_num) + "次打卡！")
+            try:
+                start()
+                cookies.clear()
+                is_time_out = False
+            except (BaseException, ConnectionError, TimeoutError):
+                print("连接超时超时，等待10s")
+                time.sleep(10)
