@@ -130,15 +130,16 @@ def start():
 
 class HufeYiban(Attendance):
     def attendance(self):
-        is_time_out = True
-        attendance_num = 0
-        while is_time_out:
-            attendance_num = attendance_num + 1
-            print("开始第" + str(attendance_num) + "次打卡！")
-            try:
-                start()
-                cookies.clear()
-                is_time_out = False
-            except (BaseException, ConnectionError, TimeoutError):
-                print("连接超时超时，等待10s")
-                time.sleep(10)
+        pass
+        # is_time_out = True
+        # attendance_num = 0
+        # while is_time_out:
+        #     attendance_num = attendance_num + 1
+        #     print("开始第" + str(attendance_num) + "次打卡！")
+        #     try:
+        #         start()
+        #         cookies.clear()
+        #         is_time_out = False
+        #     except (BaseException, ConnectionError, TimeoutError):
+        #         print("连接超时超时，等待10s")
+        #         time.sleep(10)
